@@ -2,7 +2,7 @@
 datasets/
 
 # Ignore Django static files
-.static/
+./static/
 dist/
 
 # Ignore intellij stuff
