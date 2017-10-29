@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import WifiMap from '@/components/WifiMap'
+import Home from '@/components/home/Home'
+import WifiMap from '@/components/wifi/WifiMap'
 
 Vue.use(Router)
 

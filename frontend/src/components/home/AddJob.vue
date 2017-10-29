@@ -40,6 +40,7 @@
                 <v-flex xs12>
                   <v-text-field
                     label="Description"
+                    required
                     placeholder="Enter Job Description"
                     multi-line
                     v-model="description"
@@ -63,9 +64,9 @@
             <small>*indicates required field</small>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" flat @click="clear">Clear</v-btn>
+            <v-btn color="primary" flat @click="clear()">Clear</v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="red" flat @click.native="dialog = false">Close</v-btn>
+            <v-btn color="red" flat @click.native="dialog = false; clear()">Close</v-btn>
             <v-btn
               color="blue darken-1"
               flat
@@ -93,17 +94,17 @@
     data: () => ({
       dialog: false,
       valid: true,
-      company: '',
+      company: null,
       companyRules: [
         (v) => !!v || 'Company name is required',
         (v) => (v && v.length <= 50) || 'Company name must be less than 50 characters'
       ],
-      title: '',
+      title: null,
       titleRules: [
         (v) => !!v || 'Job title is required',
         (v) => (v && v.length <= 50) || 'Job title must be less than 50 characters'
       ],
-      url: '',
+      url: null,
       urlRules: [
         (v) => !!v || 'Url is required',
         (v) => (v && isURL(v, {
@@ -120,7 +121,7 @@
         })) || 'Bad Formatting',
         (v) => (v && v.length <= 100) || 'Url must be less than 100 characters'
       ],
-      description: '',
+      description: null,
       descriptionRules: [
         (v) => (v && v.length <= 500) || 'Description must be less than 500 characters'
       ],
