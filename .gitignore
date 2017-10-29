@@ -1,3 +1,7 @@
+# Ignore Django static files
+.static/
+dist/
+
 # Ignore intellij stuff
 .idea/
 *.iml
