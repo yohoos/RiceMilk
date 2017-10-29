@@ -138,7 +138,7 @@
           formData.append('description', this.description)
           formData.append('img', this.inputFile)
 
-          axios.post('/api/jobs/', formData)
+          axios.post('/home/jobs/', formData)
             .then(response => {
               this.dialog = false
               this.clear()

@@ -21,12 +21,12 @@
       </v-toolbar>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-tile v-for="item in items.slice(0,1)" :key="item.title" @click="goTo (item.title)">
+        <v-list-tile v-for="route in routes.slice(0,1)" :key="route.name" @click="goTo (route)">
           <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ route.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>{{ route.name }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile>
@@ -34,12 +34,12 @@
             <v-list-tile-title>Projects</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-for="item in items.slice(1)" :key="item.title" @click="goTo (item.title)">
+        <v-list-tile v-for="route in routes.slice(1)" :key="route.name" @click="goTo (route)">
           <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ route.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>{{ route.name }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -63,10 +63,7 @@
   export default {
     data: () => ({
       drawer: true,
-      items: [
-        {title: 'Home', icon: 'dashboard'},
-        {title: 'Coming Soon...', icon: 'assignment'}
-      ],
+      routes: [],
       mini: false,
       right: null
     }),
@@ -74,9 +71,18 @@
       source: String
     },
     methods: {
-      goTo: function (name) {
-        this.$router.push({name: name, params: {}})
+      goTo: function (route) {
+        if (route.html === true) {
+          window.location.replace(route.path)
+        } else {
+          this.$router.push({name: route.name, params: {}})
+        }
       }
+    },
+    created: function () {
+      this.$router.options.routes.forEach(route => {
+        this.routes.push(route)
+      })
     }
   }
 </script>

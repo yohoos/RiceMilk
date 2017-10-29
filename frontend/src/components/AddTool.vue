@@ -93,7 +93,7 @@
           formData.append('favorite', this.favorite)
           formData.append('work_related', this.work_related)
 
-          axios.post('/api/tools/', formData)
+          axios.post('/home/tools/', formData)
             .then(response => {
               this.dialog = false
               this.clear()

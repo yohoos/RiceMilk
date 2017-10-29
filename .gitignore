@@ -1,3 +1,6 @@
+# Ignore data folders
+datasets/
+
 # Ignore Django static files
 .static/
 dist/

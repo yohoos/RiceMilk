@@ -23,7 +23,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', TemplateView.as_view(template_name="index.html")),
-    url(r'^api/', include('home.urls', namespace='home')),
+    url(r'^home/', include('home.urls', namespace='home')),
+    url(r'^wifi/', include('nyc_wifi.urls', namespace='nyc_wifi')),
     # url(r'^', include('TechPriceViewer.urls')),
     # Should only specify media files like this for development server only
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

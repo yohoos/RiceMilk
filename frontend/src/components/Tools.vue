@@ -69,7 +69,7 @@
     },
     methods: {
       setTools: function () {
-        axios.get('/api/tools/')
+        axios.get('/home/tools/')
           .then(response => {
             this.tools = response.data
           })
@@ -78,7 +78,7 @@
           })
       },
       deleteTool: function (tool) {
-        axios.delete('/api/tools/' + tool.id)
+        axios.delete('/home/tools/' + tool.id)
           .then(response => {
             this.setTools()
           })

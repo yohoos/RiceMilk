@@ -10,12 +10,20 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      icon: 'dashboard'
     },
     {
-      path: '/map',
+      path: '/wifi',
       name: 'WifiMap',
-      component: WifiMap
+      component: WifiMap,
+      icon: 'assignment'
+    },
+    {
+      path: '/wifi/notebook',
+      name: 'WifiNotebook',
+      icon: 'assignment',
+      html: true
     }
   ]
 })

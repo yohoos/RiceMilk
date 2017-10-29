@@ -87,8 +87,8 @@
       return {
         dialog: false,
         selectedJob: null,
-        current_job: null,
-        jobs: null
+        current_job: [],
+        jobs: []
       }
     },
     methods: {
@@ -98,7 +98,7 @@
         })
       },
       deleteJob: function (job) {
-        axios.delete('/api/jobs/' + job.id + '/')
+        axios.delete('/home/jobs/' + job.id + '/')
           .then(response => {
             this.setOldJobs()
           })
@@ -107,7 +107,7 @@
           })
       },
       changeCurrentJob: function () {
-        axios.patch('/api/jobs/' + this.current_job.id + '/', {'current': !this.current_job.current})
+        axios.patch('/home/jobs/' + this.current_job.id + '/', {'current': !this.current_job.current})
           .then(response => {
             console.log('Updated old job in database')
           })
@@ -126,7 +126,7 @@
           }
         }
 
-        axios.patch('/api/jobs/' + this.current_job.id + '/', {'current': this.current_job.current})
+        axios.patch('/home/jobs/' + this.current_job.id + '/', {'current': this.current_job.current})
           .then(response => {
             console.log('Updated current job')
             this.setOldJobs()
@@ -136,7 +136,7 @@
           })
       },
       setCurrentJob: function () {
-        axios.get('/api/jobs/current')
+        axios.get('/home/jobs/current')
           .then(response => {
             this.current_job = response.data
           })
@@ -145,7 +145,7 @@
           })
       },
       setOldJobs: function () {
-        axios.get('/api/jobs/old')
+        axios.get('/home/jobs/old')
           .then(response => {
             this.jobs = response.data
           })
