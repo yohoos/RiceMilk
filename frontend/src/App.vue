@@ -47,6 +47,7 @@
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-toolbar-title>Welcome</v-toolbar-title>
     <v-spacer></v-spacer>
+    <new-user></new-user>
     <login></login>
   </v-toolbar>
   <main>
@@ -61,11 +62,13 @@
 </template>
 
 <script>
-import Login from './components/login/Login'
+import Login from './components/user/Login'
+import NewUser from './components/user/NewUser'
 
 export default {
   components: {
-    Login
+    Login,
+    NewUser
   },
   data: () => ({
     drawer: true,

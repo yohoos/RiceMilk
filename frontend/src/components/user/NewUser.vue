@@ -1,6 +1,6 @@
 <template lang="html">
   <v-dialog v-model="dialog" persistent max-width="500px">
-    <v-btn color="green" dark slot="activator">New User</v-btn>
+    <v-btn color="orange" dark slot="activator">New User</v-btn>
     <v-card>
       <v-form v-model="valid" ref="form" lazy-validation>
         <v-card-title>
@@ -78,7 +78,7 @@ export default {
             this.clear()
           })
           .catch(e => {
-            console.log("Couldn't Log In!")
+            console.log("Couldn't Create New User In!")
           })
       }
     },
