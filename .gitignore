@@ -5,6 +5,10 @@ datasets/
 /static/
 dist/
 
+# Ignore eclipse stuff
+.project/
+.pydevproject/
+
 # Ignore intellij stuff
 .idea/
 *.iml
