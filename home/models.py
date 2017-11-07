@@ -2,9 +2,9 @@ from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
 
-LOCAL_APPS = [
-    'home'
-]
+# LOCAL_APPS = [
+#     'home'
+# ]
 
 
 # Create your models here.
@@ -22,7 +22,6 @@ class Tool(models.Model):
     img = models.ImageField(upload_to="tool_icons/")
     favorite = models.BooleanField(default=False)
     work_related = models.BooleanField(default=False)
-
 
 
 def delete_files(files_list):

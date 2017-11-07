@@ -1,5 +1,5 @@
 <template lang="html">
-  <v-dialog v-model="dialog" persistent max-width="500px">
+  <v-dialog v-model="dialog" persistent max-width="500px" v-if="hasJWT">
     <v-btn color="green" dark slot="activator">Login</v-btn>
     <v-card>
       <v-form v-model="valid" ref="form" lazy-validation>
@@ -33,7 +33,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="red" @click.native="dialog = false; clear()">Close</v-btn>
-          <v-btn color="green" @click.native="login()">Login</v-btn>
+          <v-btn color="green" @click.native="dialog = false; login()">Login</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -61,22 +61,47 @@ export default {
   methods: {
     login: function () {
       if (this.$refs.form.validate()) {
-        var formData = new FormData()
-        formData.append('username', this.username)
-        formData.append('password', this.password)
+        // var formData = new FormData()
+        // formData.append('username', this.username)
+        // formData.append('password', this.password)
 
-        axios.post('/user/login', formData)
-          .then(response => {
-            this.dialog = false
-            this.clear()
-          })
-          .catch(e => {
-            console.log("Couldn't Log In!")
-          })
+        axios.post('/user_auth/api_token_create', {
+          username: this.username,
+          password: this.password
+        })
+        .then(response => {
+          this.dialog = false
+          this.clear()
+        })
+        .catch(e => {
+          console.log(e)
+        })
       }
     },
     clear: function () {
       this.$refs.form.reset()
+    }
+  },
+  computed: {
+    hasJWT: function () {
+      var name = 'JWT_Cookie'
+      var cookie = document.cookie
+      var prefix = name + '='
+      var begin = cookie.indexOf('; ' + prefix)
+      if (begin === -1) {
+        begin = cookie.indexOf(prefix)
+        if (begin !== 0) {
+          return true
+        }
+      } else {
+        begin += 2
+        var end = document.cookie.indexOf(';', begin)
+        if (end === -1) {
+          end = cookie.length
+        }
+      }
+      return false
+      // return unescape(cookie.substring(begin + prefix.length, end));
     }
   }
 }
