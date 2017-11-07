@@ -6,8 +6,8 @@ datasets/
 dist/
 
 # Ignore eclipse stuff
-.project/
-.pydevproject/
+.project
+.pydevproject
 
 # Ignore intellij stuff
 .idea/
