@@ -52,6 +52,9 @@
         <new-user></new-user>
         <login></login>
       </div>
+      <div v-if="authenticated">
+        <logout></logout>
+      </div>
     </v-toolbar>
     <main>
       <v-content>
@@ -67,12 +70,14 @@
 <script>
   import Login from './components/user/Login'
   import NewUser from './components/user/NewUser'
+  import Logout from './components/user/Logout'
   import axios from 'axios'
 
   export default {
     components: {
       Login,
-      NewUser
+      NewUser,
+      Logout
     },
     data: () => ({
       drawer: true,
@@ -101,7 +106,7 @@
         axios.get('/user_auth/is_authenticated')
           .then(response => {
             if (response.data['is_authenticated'] === true) {
-
+              // do something to regain authentication when refreshing and cookie is not expired
             }
           })
       }
