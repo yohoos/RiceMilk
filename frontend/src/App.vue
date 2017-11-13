@@ -67,6 +67,7 @@
 <script>
   import Login from './components/user/Login'
   import NewUser from './components/user/NewUser'
+  import axios from 'axios'
 
   export default {
     components: {
@@ -95,27 +96,38 @@
       },
       setTime: function () {
         this.$store.dispatch('setTime')
+      },
+      checkAuthentication: function () {
+        axios.get('/user_auth/is_authenticated')
+          .then(response => {
+            if (response.data['is_authenticated'] === true) {
+
+            }
+          })
       }
     },
     created: function () {
       this.$router.options.routes.forEach(route => {
         this.routes.push(route)
       })
-//      setInterval(this.setTime, 1000)
+
+      setInterval(this.setTime, 1000)
+
+
     },
     computed: {
       authenticated: function () {
         return !this.$store.getters.expired
+      },
+      timeLeft: function () {
+        return this.$store.getters.expiration !== 0 && this.$store.getters.timeLeft <= 30000
       }
-//      timeLeft: function () {
-//        return this.$store.getters.timeLeft > 0 && this.$store.getters.timeLeft <= 30000
-//      }
+    },
+    watch: {
+      timeLeft: function () {
+        alert('Login Session About To Expire!!')
+      }
     }
-//    watch: {
-//      timeLeft: function () {
-//        alert('Login Session About To Expire!!')
-//      }
-//    }
   }
 </script>
 <style>

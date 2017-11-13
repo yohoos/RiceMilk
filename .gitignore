@@ -3,6 +3,7 @@ datasets/
 
 # Ignore Django static files
 /static/
+/templates/
 dist/
 
 # Ignore eclipse stuff

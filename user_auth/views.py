@@ -37,9 +37,9 @@ class TokenView(APIView):
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
         expiration = datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA
-        expiration = expiration.timestamp() * 1000
+        utc_ms = expiration.timestamp() * 1000
 
-        response = Response({'token': token, 'expires': expiration}, status=status.HTTP_201_CREATED)
+        response = Response({'token': token, 'expires': utc_ms}, status=status.HTTP_201_CREATED)
         response.set_cookie(api_settings.JWT_AUTH_COOKIE, token, expires=expiration, httponly=True)
 
         return response

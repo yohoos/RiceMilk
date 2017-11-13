@@ -12,8 +12,6 @@ export default new Vuex.Store({
   mutations: {
     SET_AUTH: function (state, expiration) {
       state.expiration = expiration
-      console.log(Date.now())
-      console.log(expiration)
     },
     REMOVE_AUTH: function (state) {
       state.expiration = 0
