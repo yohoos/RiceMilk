@@ -17,7 +17,7 @@
           </v-card-title>
           <v-card-actions>
             <v-btn :href="current_job.url" flat color="orange">Website</v-btn>
-            <v-dialog v-model="dialog" max-width="500px">
+            <v-dialog v-model="dialog" max-width="500px" v-if="authenticated">
               <v-btn color="red" flat slot="activator">Change</v-btn>
               <v-card>
                 <v-card-title>
@@ -48,7 +48,7 @@
       </v-flex>
     </v-layout>
     <v-divider></v-divider>
-    <add-job @reset="setOldJobs()"></add-job>
+    <add-job @reset="setOldJobs()" v-if="authenticated"></add-job>
     <v-layout row wrap @reset="setOldJobs()">
       <v-flex xs12 text-xs-center><h4>Previous Experiences</h4></v-flex>
       <v-flex md6 xs12 v-for="(job, index) in jobs" :key="job.id" @reset="setOldJobs()">
@@ -66,7 +66,7 @@
           <v-card-actions>
             <v-btn :href="job.url" flat color="orange">Website</v-btn>
             <v-spacer></v-spacer>
-            <v-btn flat color="red" @click="deleteJob(job)">Remove</v-btn>
+            <v-btn flat color="red" @click="deleteJob(job)" v-if="authenticated">Remove</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -152,6 +152,11 @@
           .catch(e => {
             console.log(e)
           })
+      }
+    },
+    computed: {
+      authenticated: function () {
+        return !this.$store.getters.expired
       }
     },
     mounted: function () {

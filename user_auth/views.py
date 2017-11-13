@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 from django.contrib.auth import authenticate
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -36,7 +36,8 @@ class TokenView(APIView):
 
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
-        expiration = datetime.now() + api_settings.JWT_EXPIRATION_DELTA
+        expiration = datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA
+        expiration = expiration.timestamp() * 1000
 
         response = Response({'token': token, 'expires': expiration}, status=status.HTTP_201_CREATED)
         response.set_cookie(api_settings.JWT_AUTH_COOKIE, token, expires=expiration, httponly=True)
@@ -45,6 +46,9 @@ class TokenView(APIView):
 
 
 def is_authenticated(request):
-    check = request.COOKIES.get(api_settings.JWT_AUTH_COOKIE) is not None
-    # return Response(status=status.HTTP_200_OK)
-    return JsonResponse({'is_authenticated': check})
+    if request.method == 'GET':
+        check = request.COOKIES.get(api_settings.JWT_AUTH_COOKIE) is not None
+        # return Response(status=status.HTTP_200_OK)
+        return JsonResponse({'is_authenticated': check})
+    else:
+        return Http404()

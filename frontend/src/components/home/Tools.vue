@@ -4,7 +4,7 @@
     wrap
     align-center
   >
-    <add-tool @reset_tools="setTools"></add-tool>
+    <add-tool @reset_tools="setTools" v-if="authenticated"></add-tool>
     <v-flex xs12 sm4>
       <div class="text-xs-center">
         <h2 class="headline">Tools I Use At Work</h2>
@@ -21,7 +21,7 @@
                 <div class="headline text-xs-center">{{ tool.name }}</div>
               </v-card-title>
               <v-card-actions>
-                <v-btn flat color="red" @click="deleteTool(tool)">Remove</v-btn>
+                <v-btn flat color="red" @click="deleteTool(tool)" v-if="authenticated">Remove</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -44,7 +44,7 @@
                 <div class="headline text-xs-center">{{ tool.name }}</div>
               </v-card-title>
               <v-card-actions>
-                <v-btn flat color="red" @click="deleteTool(tool)">Remove</v-btn>
+                <v-btn flat color="red" @click="deleteTool(tool)" v-if="authenticated">Remove</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -91,6 +91,11 @@
       },
       getFavoritesOnly: function () {
         return this.tools.filter(tool => tool.work_related === false && tool.favorite === true)
+      }
+    },
+    computed: {
+      authenticated: function () {
+        return !this.$store.getters.expired
       }
     },
     mounted: function () {

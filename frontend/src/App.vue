@@ -48,8 +48,10 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Welcome</v-toolbar-title>
       <v-spacer></v-spacer>
-      <new-user></new-user>
-      <login></login>
+      <div v-if="!authenticated">
+        <new-user></new-user>
+        <login></login>
+      </div>
     </v-toolbar>
     <main>
       <v-content>
@@ -90,13 +92,30 @@
             params: {}
           })
         }
+      },
+      setTime: function () {
+        this.$store.dispatch('setTime')
       }
     },
     created: function () {
       this.$router.options.routes.forEach(route => {
         this.routes.push(route)
       })
+//      setInterval(this.setTime, 1000)
+    },
+    computed: {
+      authenticated: function () {
+        return !this.$store.getters.expired
+      }
+//      timeLeft: function () {
+//        return this.$store.getters.timeLeft > 0 && this.$store.getters.timeLeft <= 30000
+//      }
     }
+//    watch: {
+//      timeLeft: function () {
+//        alert('Login Session About To Expire!!')
+//      }
+//    }
   }
 </script>
 <style>
