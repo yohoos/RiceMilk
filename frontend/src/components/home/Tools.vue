@@ -7,6 +7,7 @@
     <add-tool @reset_tools="setTools" v-if="authenticated"></add-tool>
     <v-flex xs12 sm4>
       <div class="text-xs-center">
+        <br>
         <h2 class="headline">Tools I Use At Work</h2>
         <!--<span class="subheading"><i>Big Data Tools</i></span>-->
       </div>

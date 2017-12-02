@@ -61,10 +61,6 @@
     methods: {
       login: function () {
         if (this.$refs.form.validate()) {
-          // var formData = new FormData()
-          // formData.append('username', this.username)
-          // formData.append('password', this.password)
-
           axios.post('/user_auth/api_token_create', {
             username: this.username,
             password: this.password

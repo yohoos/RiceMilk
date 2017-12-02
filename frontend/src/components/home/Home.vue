@@ -135,7 +135,7 @@
     data: function () {
       return {
         welcome: 'Yuhua Ni',
-        profession: 'Data Engineer',
+        profession: 'Software Engineer',
         height: '400'
       }
     },
