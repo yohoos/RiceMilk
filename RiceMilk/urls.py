@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^home/', include('home.urls', namespace='home')),
     url(r'^wifi/', include('nyc_wifi.urls', namespace='nyc_wifi')),
     url(r'^user_auth/', include('user_auth.urls', namespace='user_auth')),
-    # url(r'^', include('TechPriceViewer.urls')),
+    url(r'^twitter/', include('twitter_stream.urls', namespace='twitter_stream')),
     # Should only specify media files like this for development server only
 ]
 
